@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="js/y-axis.js"></script>
+        <script src="js/diver.js"></script>
+        <script src="js/terrain.js"></script>
+        <script src="js/bubbles.js"></script>
+        <script src="js/fish.js"></script>
+        <script src="js/coin.js"></script>
+        <script src="js/gameplay.js"></script>
+    </head>
+    <body>
+        <a-scene renderer="colorManagement: true;" physics="debug: false">
+            <!--Camera-->
+            <a-entity 
+                id="camera"
+                camera
+                look-controls="false"
+                position="0 12.5 7.5"
+                rotation="-35 0 0"
+            ></a-entity>
+
+            <!--Left Text-->
+            <a-entity position="0 -2.5 -12.5">
+                <a-entity
+                    position="-20 14.5 0"
+                    rotation="-35 0 0"
+                    text="font:exo2bold; align:center; width:40; color:black; value:VR SCUBA DIVE"
+                ></a-entity>
+
+                <a-entity
+                    id="timer"
+                    position="-13 12.75 0"
+                    rotation="-35 0 0"
+                    text="font:exo2bold; align:left; width:30; color:black; value: 00:00"
+                ></a-entity>
+                <a-entity
+                    position="-18 12.6 0"
+                    rotation="-35 0 0"
+                    text="font:aileronsemibold; align:left; width:12; color:black; value:TIME \n REMAINING"
+                ></a-entity>
+
+                <a-entity
+                    id="coins"
+                    position="-4.25 12.75 0"
+                    rotation="-35 0 0"
+                    text="font:exo2bold; align:left; width:30; color:black; value: 20"
+                ></a-entity>
+                <a-entity
+                    position="-11.5 12.6 0"
+                    rotation="-35 0 0"
+                    text="font:aileronsemibold; align:left; width:12; color:black; value:COINS \n REMAINING"
+                ></a-entity>
+            </a-entity>
+
+            <!--Right Text (Score)-->
+            <a-entity position="0 -2.5 -12.5">
+                <a-entity
+                    position="23.375 14.25 0"
+                    rotation="-35 0 0"
+                    text="font:exo2bold; align:center; width:25; color:black; value:SCORE"
+                ></a-entity>
+                <a-entity
+                    id="score"
+                    position="24.5 12.75 0"
+                    rotation="-35 0 0"
+                    text="font:exo2bold; align:center; width:30; color:black; value: 0"
+                ></a-entity>
+            </a-entity>
+                
+            <!--Middle Text (Game Over)-->
+            <a-entity
+                id="gameover"
+                rotation="-35 0 0"
+                position="0 9 1"
+                text="font:exo2bold; align:center; width:40; color:white; value:GAME OVER"
+                visible="false"
+            ></a-entity>
+
+            <!--Sky-->
+            <a-sky src="assets/blue_fade_bg.png"></a-sky>
+            
+            <!--Terrain-->
+            <a-entity
+                id="terrain"
+                position="0 -150 -75"
+                rotation="-90 0 0"
+                animation="property:position; to: 0 -150 75; loop:true; easing:linear; dur: 20000"
+                terrain
+                rotate-terrain
+                fish
+                coin
+            ></a-entity>
+
+            <!--Bubbles-->
+            <a-entity
+                id="bubbles"
+                position="0 -5 -10"
+                rotation="-90 180 0"
+                bubbles
+                rotate-bubbles
+            ></a-entity>
+
+            <!--Diver-->
+            <a-entity
+                id="diver"
+                position="0 0 0"
+                rotation="-20 180 0"
+                diver
+                rotate-diver
+                body="type: dynamic; mass: 0; shape: none;"
+                shape__main:="shape: box; halfExtents: 10 30 7.5; offset: 0 5 40; orientation: 0.7125 0 0"
+                game-play
+            ></a-entity>
+        </a-scene>
+    </body>
+</html>
